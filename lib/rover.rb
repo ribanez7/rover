@@ -13,24 +13,21 @@ module Rover
 
     def call
       mission = Mission.new(@file)
-      mission.call
-      @robots = mission.robots
-      @plateau = mission.plateau
+      @plateau, @robots = mission.call
+      accomplish_mission
     end
 
     private
 
-    def place_robot_on_position(position)
+    def accomplish_mission
       until @robots.all?(&:finished)
         @robots.each do |robot|
           next if robot.finished
           robot.move!
+          # @plateau.safe_position?(robot.location)
         end
       end
-    end
-
-    def add_robot_to_solutions(final_position)
-      @solution_report << final_position
+      puts @plateau.display
     end
   end
 end

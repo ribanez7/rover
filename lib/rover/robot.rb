@@ -1,3 +1,5 @@
+require 'rover/compass'
+
 module Rover
   class Robot
     attr_reader :movements, :column, :row,
@@ -5,7 +7,9 @@ module Rover
 
     def initialize(instruction)
       position = instruction.first
-      @column, @row, @heading = position.split
+      column, row, @heading = position.split
+      @column = column.to_i
+      @row = row.to_i
       @movements = instruction.last.scan(/\w/)
     end
 
@@ -38,16 +42,20 @@ module Rover
 
     def commit_maneuver(maneuver)
       if maneuver.match? /L|R/
-        @heading = maneuver
+        rewrite_heading(maneuver)
       else
         rewrite_coordinates(maneuver)        
       end
     end
 
+    def rewrite_heading(maneuver)
+      @heading = Compass.new(heading, maneuver).call
+    end
+
     def rewrite_coordinates(maneuver)
       case heading
       when 'N'
-        @column +=1
+        @column += 1
       when 'E'
         @row += 1
       when 'S'

@@ -9,8 +9,9 @@ module Rover
 
     def call
       coordinates, instructions = serialize_plat(@file)
-
       plateau = Plateau.new(coordinates)
+      plateau.place_robots(instructions)
+      [plateau, plateau.robots]
     end
 
     private
