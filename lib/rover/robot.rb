@@ -60,11 +60,10 @@ module Rover
         @column += 1
       when 'S'
         @row -= 1
-      when 'O'
+      when 'W'
         @column -= 1
-      # else
-      #   puts self.inspect
-      #   raise RuntimeError, "Unrecognized maneuver"
+      else
+        raise RuntimeError, "Unrecognized maneuver"
       end
     end
   end

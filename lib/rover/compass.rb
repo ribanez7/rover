@@ -26,10 +26,10 @@ module Rover
 
     def turn_right 
       case @current
+      when 'W' then 'N'
       when 'N' then 'E'
       when 'E' then 'S'
       when 'S' then 'W'
-      when 'W' then 'N'
       end
     end
   end
