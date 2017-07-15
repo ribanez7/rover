@@ -35,6 +35,7 @@ module Rover
       else
         maneuver = @movements.shift
         commit_maneuver(maneuver)
+        self.move!
       end
     end
 
