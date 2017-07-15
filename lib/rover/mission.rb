@@ -25,15 +25,8 @@ module Rover
 
     def build_instructions(raw)
       raw_array = raw.split("\n")
-      positions, maneuvers = raw_array.partition { |v| v.match? /\W+/ }
-      instructions = positions.zip(maneuvers)
+      positions, maneuvers = raw_array.partition { |v| v.match? (/\W+/) }
+      positions.zip(maneuvers)
     end
   end
 end
-
-# puts "rows: #{plateau.rows}"
-# puts "starting_row: #{plateau.starting_row}"
-# puts "ending_row: #{plateau.ending_row}"
-# puts "columns: #{plateau.columns}"
-# puts "starting_column: #{plateau.starting_column}"
-# puts "ending_column: #{plateau.ending_column}"

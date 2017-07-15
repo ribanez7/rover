@@ -4,11 +4,18 @@ Test provided by XING to evaluate Rubén Ibáñez Carmona programming skills.
 
 ## Usage
 
+You can run the program as a simple script. Invoke it this way:
+
+```bash
+ruby -Ilib ./bin/rover EXAMPLE
+```
+
+An alternative would be to run it as a development gem.
 As the gem is not packaged, run first `bin/setup` to install dependencies.
 To execute the program, run:
 
 ```bash
-ruby -Ilib ./bin/rover EXAMPLE
+bundle exec rover EXAMPLE
 ```
 
 Where EXAMPLE is just a path to a file with the input.

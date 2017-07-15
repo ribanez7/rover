@@ -54,7 +54,7 @@ module Rover
     end
 
     def display
-      final_positions = robots.map(&:position).join("\n")
+      robots.map(&:position).join("\n")
     end
 
     private
