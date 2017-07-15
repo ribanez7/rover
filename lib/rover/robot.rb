@@ -44,7 +44,7 @@ module Rover
       if maneuver.match? /L|R/
         rewrite_heading(maneuver)
       else
-        rewrite_coordinates(maneuver)        
+        move_forward
       end
     end
 
@@ -52,18 +52,19 @@ module Rover
       @heading = Compass.new(heading, maneuver).call
     end
 
-    def rewrite_coordinates(maneuver)
+    def move_forward
       case heading
       when 'N'
-        @column += 1
-      when 'E'
         @row += 1
+      when 'E'
+        @column += 1
       when 'S'
-        @column -= 1
-      when 'O'
         @row -= 1
-      else
-        raise RuntimeError, "Unrecognized maneuver #{maneuver}"
+      when 'O'
+        @column -= 1
+      # else
+      #   puts self.inspect
+      #   raise RuntimeError, "Unrecognized maneuver"
       end
     end
   end
