@@ -4,6 +4,9 @@ module Rover
   class Plateau
     attr_accessor :robots
 
+    class GeographicalError < StandardError
+    end
+
     def initialize(coordinates)
       @size_x = coordinates.first.to_i
       @size_y = coordinates.last.to_i
@@ -62,7 +65,7 @@ module Rover
 
     def safe_regarding_comrades?(robot)
       unless (robots - [robot]).none? { |r| r.location == robot.location }
-        raise RuntimeError, <<~EOF
+        raise GeographicalError, <<~EOF
           A rover is trying to access a place already occupied.
         EOF
       end
@@ -70,7 +73,7 @@ module Rover
 
     def safe_inside_plateau?(loc)
       unless column_range.include?(loc.first) && row_range.include?(loc.last)
-        raise RuntimeError, <<~EOF
+        raise GeographicalError, <<~EOF
           A rover is trying to access a place out of the plateau. It will fall.
         EOF
       end

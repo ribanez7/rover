@@ -4,6 +4,9 @@ module Rover
   class Robot
     attr_reader :column, :row, :heading, :finished
 
+    class RoboticError < StandardError
+    end
+
     def initialize(instruction, plateau = nil)
       position = instruction.first
       column, row, @heading = position.split
@@ -31,18 +34,18 @@ module Rover
       else
         maneuver = @movements.shift
         commit_maneuver(maneuver)
-        @plateau.safe_position?(self)
-        self.move!
+        @plateau.safe_position?(self) if @plateau
+        move!
       end
     end
 
     private
 
     def commit_maneuver(maneuver)
-      if maneuver.match? (/L|R/)
+      if maneuver.match? /L|R/
         rewrite_heading(maneuver)
       else
-        move_forward
+        move_forward(maneuver)
       end
     end
 
@@ -50,7 +53,10 @@ module Rover
       @heading = Compass.new(heading, maneuver).call
     end
 
-    def move_forward
+    def move_forward(maneuver)
+      raise RoboticError, <<~EOR if maneuver != 'M'
+        "Unrecognized maneuver #{maneuver}"
+      EOR
       case heading
       when 'N'
         @row += 1
@@ -60,8 +66,6 @@ module Rover
         @row -= 1
       when 'W'
         @column -= 1
-      else
-        raise RuntimeError, "Unrecognized maneuver"
       end
     end
   end
