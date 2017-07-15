@@ -1,5 +1,7 @@
 module Rover
   class Compass
+    attr_writer :current
+
     def initialize(current, new_direction)
       @new_direction = new_direction
       @current = current

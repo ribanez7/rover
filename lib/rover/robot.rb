@@ -4,7 +4,7 @@ module Rover
   class Robot
     attr_reader :column, :row, :heading, :finished
 
-    def initialize(instruction, plateau)
+    def initialize(instruction, plateau = nil)
       position = instruction.first
       column, row, @heading = position.split
       @column = column.to_i
@@ -19,10 +19,6 @@ module Rover
 
     def location
       [column, row]
-    end
-
-    def location?(x, y)
-      location == [x, y]
     end
 
     def position
