@@ -24,7 +24,6 @@ module Rover
         @robots.each do |robot|
           next if robot.finished
           robot.move!
-          # @plateau.safe_position?(robot.location)
         end
       end
       puts @plateau.display

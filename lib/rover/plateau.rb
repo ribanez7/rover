@@ -19,7 +19,7 @@ module Rover
     end
 
     def ending_row
-      rows - 1
+      rows
     end
 
     def columns
@@ -31,7 +31,7 @@ module Rover
     end
 
     def ending_column
-      columns - 1
+      columns
     end
 
     def column_range
@@ -44,13 +44,14 @@ module Rover
 
     def place_robots(instructions)
       instructions.each do |instruction|
-        @robots << Robot.new(instruction)
+        @robots << Robot.new(instruction, self)
       end
     end
 
-    def safe_position?(loc)
-      safe_regarding_comrades?(loc)
-      safe_inside_plateau?(loc)
+    def safe_position?(robot)
+      safe_regarding_comrades?(robot)
+      safe_inside_plateau?(robot.location)
+      true
     end
 
     def display
@@ -59,8 +60,8 @@ module Rover
 
     private
 
-    def safe_regarding_comrades?(loc)
-      unless robots.none? { |r| r.location == loc }
+    def safe_regarding_comrades?(robot)
+      unless (robots - [robot]).none? { |r| r.location == robot.location }
         raise RuntimeError, <<~EOF
           A rover is trying to access a place already occupied.
         EOF

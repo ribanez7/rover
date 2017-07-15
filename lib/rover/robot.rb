@@ -2,15 +2,15 @@ require 'rover/compass'
 
 module Rover
   class Robot
-    attr_reader :movements, :column, :row,
-                :heading, :finished
+    attr_reader :column, :row, :heading, :finished
 
-    def initialize(instruction)
+    def initialize(instruction, plateau)
       position = instruction.first
       column, row, @heading = position.split
       @column = column.to_i
       @row = row.to_i
       @movements = instruction.last.scan(/\w/)
+      @plateau = plateau
     end
 
     def to_s
@@ -35,6 +35,7 @@ module Rover
       else
         maneuver = @movements.shift
         commit_maneuver(maneuver)
+        @plateau.safe_position?(self)
         self.move!
       end
     end
