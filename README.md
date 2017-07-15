@@ -1,6 +1,6 @@
 # Rover test
 
-Test provided by XING to evaluate Rubén Ibáñez Carmona programming skills.
+Test to evaluate some programming skills.
 
 ## Usage
 
