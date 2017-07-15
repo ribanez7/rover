@@ -1,14 +1,10 @@
 require 'rover/version'
 require 'rover/mission'
-require 'rover/print_helpers'
 
 module Rover
   class Rover
-    include PrintHelpers
-
-    def initialize(file, verbosity = false)
+    def initialize(file)
       @file = File.expand_path(file)
-      @verbose = verbosity
     end
 
     def call

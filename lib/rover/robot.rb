@@ -42,7 +42,7 @@ module Rover
     private
 
     def commit_maneuver(maneuver)
-      if maneuver.match? /L|R/
+      if maneuver.match? (/L|R/)
         rewrite_heading(maneuver)
       else
         move_forward(maneuver)
