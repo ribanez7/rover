@@ -18,7 +18,24 @@ To execute the program, run:
 bundle exec rover EXAMPLE
 ```
 
-Where EXAMPLE is just a path to a file with the input.
+Where EXAMPLE is just a path to a file with the test input.
+
+Two example files are provided.
+
+**example_mission** file must output:
+
+```
+3 1 W
+0 3 E
+```
+
+while **example_provided** must output:
+
+```
+1 3 N
+5 1 E
+```
+
 
 ## Development
 
